@@ -8,6 +8,7 @@ import { SAMPLE_CARDS } from './data/sampleCards';
 
 function App() {
   const [cards, setCards] = useState<Card[]>(SAMPLE_CARDS);
+  const [showImposter, setShowImposter] = useState(false);
   const { settings, setSettings } = useSettings();
   const {
     gameState,
@@ -20,6 +21,10 @@ function App() {
   } = useImposterGame({ cards, settings });
 
   const [ariaLiveMessage, setAriaLiveMessage] = useState('');
+
+  useEffect(() => {
+    setShowImposter(false);
+  }, [gameState.phase]);
 
   useEffect(() => {
     if (gameState.phase === 'revealing') {
@@ -64,6 +69,11 @@ function App() {
     startGame(gameState.playerCount);
   };
 
+  const handleRevealImposter = () => {
+    setShowImposter(true);
+    setAriaLiveMessage(`The imposter is Player ${gameState.imposterIndex + 1}`);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <div
@@ -102,7 +112,30 @@ function App() {
             onReveal={revealRole}
             onNewRound={newRound}
             onNewGame={newGame}
+            onRevealImposter={handleRevealImposter}
           />
+        )}
+
+        {showImposter && gameState.phase === 'finished' && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center space-y-6 animate-fadeIn">
+              <div className="text-5xl font-bold text-red-600">
+                ඞ IMPOSTER!
+              </div>
+              <div className="text-3xl font-bold text-gray-900">
+                Player {gameState.imposterIndex + 1}
+              </div>
+              <div className="text-xl text-gray-700">
+                The round card was: <span className="font-semibold text-blue-600">{gameState.currentCard?.name}</span>
+              </div>
+              <button
+                onClick={() => setShowImposter(false)}
+                className="w-full py-3 px-6 text-lg font-bold text-white bg-gray-600 rounded-xl hover:bg-gray-700 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
         )}
       </main>
     </div>

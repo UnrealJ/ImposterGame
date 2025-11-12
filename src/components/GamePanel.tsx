@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Eye, RotateCcw, Home } from 'lucide-react';
+import { Eye, RotateCcw, Home, Zap } from 'lucide-react';
 import { GameState } from '../types';
 
 interface GamePanelProps {
@@ -8,6 +8,7 @@ interface GamePanelProps {
   onReveal: () => void;
   onNewRound: () => void;
   onNewGame: () => void;
+  onRevealImposter: () => void;
 }
 
 export const GamePanel = ({
@@ -16,6 +17,7 @@ export const GamePanel = ({
   onReveal,
   onNewRound,
   onNewGame,
+  onRevealImposter,
 }: GamePanelProps) => {
   const roleTextRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -107,10 +109,7 @@ export const GamePanel = ({
           <div className="text-2xl sm:text-3xl font-bold text-green-600 mb-4">
             All players have seen their roles!
           </div>
-          <div className="text-lg sm:text-xl text-gray-700">
-            Round card: <span className="font-semibold">{gameState.currentCard?.name}</span>
-          </div>
-          <div className="text-base sm:text-lg text-gray-600 mt-2">
+          <div className="text-base sm:text-lg text-gray-600">
             Now discuss and find the imposter
           </div>
         </div>
@@ -127,21 +126,30 @@ export const GamePanel = ({
       </div>
 
       {gameState.phase === 'finished' ? (
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col gap-3">
           <button
-            onClick={onNewRound}
-            className="flex-1 py-4 px-6 text-lg font-bold text-white bg-green-600 rounded-2xl hover:bg-green-700 active:bg-green-800 transition-colors min-h-[56px] flex items-center justify-center gap-2"
+            onClick={onRevealImposter}
+            className="w-full py-4 px-6 text-lg font-bold text-white bg-red-600 rounded-2xl hover:bg-red-700 active:bg-red-800 transition-colors min-h-[56px] flex items-center justify-center gap-2"
           >
-            <RotateCcw size={20} />
-            New Round
+            <Zap size={20} />
+            Reveal Imposter
           </button>
-          <button
-            onClick={onNewGame}
-            className="flex-1 py-4 px-6 text-lg font-bold text-white bg-gray-600 rounded-2xl hover:bg-gray-700 active:bg-gray-800 transition-colors min-h-[56px] flex items-center justify-center gap-2"
-          >
-            <Home size={20} />
-            New Game
-          </button>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <button
+              onClick={onNewRound}
+              className="flex-1 py-4 px-6 text-lg font-bold text-white bg-green-600 rounded-2xl hover:bg-green-700 active:bg-green-800 transition-colors min-h-[56px] flex items-center justify-center gap-2"
+            >
+              <RotateCcw size={20} />
+              New Round
+            </button>
+            <button
+              onClick={onNewGame}
+              className="flex-1 py-4 px-6 text-lg font-bold text-white bg-gray-600 rounded-2xl hover:bg-gray-700 active:bg-gray-800 transition-colors min-h-[56px] flex items-center justify-center gap-2"
+            >
+              <Home size={20} />
+              New Game
+            </button>
+          </div>
         </div>
       ) : (
         <button
