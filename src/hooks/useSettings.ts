@@ -6,6 +6,7 @@ const SETTINGS_KEY = 'imposter-settings';
 const DEFAULT_SETTINGS: GameSettings = {
   revealDuration: 3,
   preventConsecutiveCard: true,
+  noHintsForImposter: false,
 };
 
 export const useSettings = () => {
@@ -18,6 +19,7 @@ export const useSettings = () => {
           revealDuration: parsed.revealDuration ?? DEFAULT_SETTINGS.revealDuration,
           preventConsecutiveCard:
             parsed.preventConsecutiveCard ?? DEFAULT_SETTINGS.preventConsecutiveCard,
+          noHintsForImposter: parsed.noHintsForImposter ?? DEFAULT_SETTINGS.noHintsForImposter,
         };
       }
     } catch {

@@ -113,6 +113,7 @@ function App() {
             onNewRound={newRound}
             onNewGame={newGame}
             onRevealImposter={handleRevealImposter}
+            settings={settings}
           />
         )}
 

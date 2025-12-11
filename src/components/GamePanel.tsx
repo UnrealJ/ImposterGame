@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Eye, RotateCcw, Home, Zap } from 'lucide-react';
-import { GameState } from '../types';
+import { GameState, GameSettings } from '../types';
 
 interface GamePanelProps {
   gameState: GameState;
@@ -9,6 +9,7 @@ interface GamePanelProps {
   onNewRound: () => void;
   onNewGame: () => void;
   onRevealImposter: () => void;
+  settings: GameSettings;
 }
 
 export const GamePanel = ({
@@ -18,6 +19,7 @@ export const GamePanel = ({
   onNewRound,
   onNewGame,
   onRevealImposter,
+  settings,
 }: GamePanelProps) => {
   const roleTextRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -53,12 +55,14 @@ export const GamePanel = ({
               <div className="text-3xl sm:text-4xl font-bold text-red-600 mb-4">
                 YOU ARE THE IMPOSTER!
               </div>
-              <div className="text-xl sm:text-2xl text-gray-700">
-                <div className="font-semibold mb-2">Hint:</div>
-                <div className="text-lg sm:text-xl text-gray-600">
-                  {gameState.currentCard?.hint || 'No hint'}
+              {!settings.noHintsForImposter && (
+                <div className="text-xl sm:text-2xl text-gray-700">
+                  <div className="font-semibold mb-2">Hint:</div>
+                  <div className="text-lg sm:text-xl text-gray-600">
+                    {gameState.currentCard?.hint || 'No hint'}
+                  </div>
                 </div>
-              </div>
+              )}
             </>
           ) : (
             <div className="text-2xl sm:text-3xl text-gray-800">

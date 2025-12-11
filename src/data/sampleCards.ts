@@ -1,6 +1,6 @@
 import { Card } from '../types';
 
-export const SAMPLE_CARDS: Card[] = [
+const CLASH_ROYALE_CARDS: Card[] = [
   { name: 'Archers', hint: 'Duo' },
   { name: 'Archer Queen', hint: 'Transparent' },
   { name: 'Baby Dragon', hint: 'Splash' },
@@ -113,3 +113,43 @@ export const SAMPLE_CARDS: Card[] = [
   { name: 'Royal Chef', hint: 'Cooking' },
   { name: 'Tower Princess', hint: 'Very commonly used' }
 ];
+
+const FOOD_CARDS: Card[] = [
+  { name: 'Pancakes', hint: 'Syrup' },
+  { name: 'Waffles', hint: 'Square' },
+  { name: 'Omelette', hint: 'Eggs' },
+  { name: 'French Toast', hint: 'Cinnamon' },
+  { name: 'Bacon', hint: 'Crispy' },
+  { name: 'Sausage', hint: 'Long' },
+  { name: 'Salad', hint: 'Healthy' },
+  { name: 'Yogurt', hint: 'Creamy' },
+  { name: 'Smoothie', hint: 'Blended' },
+  { name: 'Fruit Bowl', hint: 'Colorful' },
+  { name: 'Sandwich', hint: 'Layered' },
+  { name: 'Soup', hint: 'Warm' },
+  { name: 'Pizza', hint: 'Cheesy' },
+  { name: 'Burger', hint: 'Juicy' },
+  { name: 'Fries', hint: 'Crispy' },
+  { name: 'Taco', hint: 'Mexican' },
+  { name: 'Sushi', hint: 'Raw' },
+  { name: 'Pasta', hint: 'Cheesy' },
+  { name: 'Steak', hint: 'Juicy' },
+  { name: 'Ice Cream', hint: 'Cold' },
+  { name: 'Cake', hint: 'Sweet' },
+  { name: 'Pie', hint: 'Crusty' },
+  { name: 'Cookie', hint: 'Crunchy' },
+  { name: 'Donut', hint: 'Glazed' },
+  { name: 'Brownie', hint: 'Fudgy' },
+  { name: 'Cupcake', hint: 'Frosted' },
+  { name: 'Muffin', hint: 'Blueberry' },
+  { name: 'Pudding', hint: 'Soft' },
+  { name: 'Jelly', hint: 'Wobbly' },
+  { name: 'Candy', hint: 'Sugary' }
+];
+
+export const PRESETS = {
+  'Clash Royale Cards': CLASH_ROYALE_CARDS,
+  'Food': FOOD_CARDS,
+};
+
+export const SAMPLE_CARDS = CLASH_ROYALE_CARDS;
