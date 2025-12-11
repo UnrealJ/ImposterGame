@@ -9,6 +9,7 @@ interface GamePanelProps {
   onNewRound: () => void;
   onNewGame: () => void;
   onRevealImposter: () => void;
+  onRevealCard: () => void;
   settings: GameSettings;
 }
 
@@ -19,6 +20,7 @@ export const GamePanel = ({
   onNewRound,
   onNewGame,
   onRevealImposter,
+  onRevealCard,
   settings,
 }: GamePanelProps) => {
   const roleTextRef = useRef<HTMLDivElement>(null);
@@ -131,13 +133,22 @@ export const GamePanel = ({
 
       {gameState.phase === 'finished' ? (
         <div className="flex flex-col gap-3">
-          <button
-            onClick={onRevealImposter}
-            className="w-full py-4 px-6 text-lg font-bold text-white bg-red-600 rounded-2xl hover:bg-red-700 active:bg-red-800 transition-colors min-h-[56px] flex items-center justify-center gap-2"
-          >
-            <Zap size={20} />
-            Reveal Imposter
-          </button>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <button
+              onClick={onRevealImposter}
+              className="flex-1 py-4 px-6 text-lg font-bold text-white bg-red-600 rounded-2xl hover:bg-red-700 active:bg-red-800 transition-colors min-h-[56px] flex items-center justify-center gap-2"
+            >
+              <Zap size={20} />
+              Reveal Imposter
+            </button>
+            <button
+              onClick={onRevealCard}
+              className="flex-1 py-4 px-6 text-lg font-bold text-white bg-blue-600 rounded-2xl hover:bg-blue-700 active:bg-blue-800 transition-colors min-h-[56px] flex items-center justify-center gap-2"
+            >
+              <Eye size={20} />
+              Reveal Card
+            </button>
+          </div>
           <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={onNewRound}

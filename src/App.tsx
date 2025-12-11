@@ -8,7 +8,7 @@ import { SAMPLE_CARDS } from './data/sampleCards';
 
 function App() {
   const [cards, setCards] = useState<Card[]>(SAMPLE_CARDS);
-  const [showImposter, setShowImposter] = useState(false);
+  const [showImposter, setShowImposter] = useState<'imposter' | 'card' | null>(null);
   const { settings, setSettings } = useSettings();
   const {
     gameState,
@@ -70,8 +70,13 @@ function App() {
   };
 
   const handleRevealImposter = () => {
-    setShowImposter(true);
+    setShowImposter('imposter');
     setAriaLiveMessage(`The imposter is Player ${gameState.imposterIndex + 1}`);
+  };
+
+  const handleRevealCard = () => {
+    setShowImposter('card');
+    setAriaLiveMessage(`The round card was ${gameState.currentCard?.name}`);
   };
 
   return (
@@ -113,6 +118,7 @@ function App() {
             onNewRound={newRound}
             onNewGame={newGame}
             onRevealImposter={handleRevealImposter}
+            onRevealCard={handleRevealCard}
             settings={settings}
           />
         )}
@@ -120,17 +126,27 @@ function App() {
         {showImposter && gameState.phase === 'finished' && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
             <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center space-y-6 animate-fadeIn">
-              <div className="text-5xl font-bold text-red-600">
-                ඞ IMPOSTER!
-              </div>
-              <div className="text-3xl font-bold text-gray-900">
-                Player {gameState.imposterIndex + 1}
-              </div>
-              <div className="text-xl text-gray-700">
-                The round card was: <span className="font-semibold text-blue-600">{gameState.currentCard?.name}</span>
-              </div>
+              {showImposter === 'imposter' ? (
+                <>
+                  <div className="text-5xl font-bold text-red-600">
+                    ඞ IMPOSTER!
+                  </div>
+                  <div className="text-3xl font-bold text-gray-900">
+                    Player {gameState.imposterIndex + 1}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="text-4xl font-bold text-blue-600">
+                    The Card Was:
+                  </div>
+                  <div className="text-3xl font-bold text-gray-900">
+                    {gameState.currentCard?.name}
+                  </div>
+                </>
+              )}
               <button
-                onClick={() => setShowImposter(false)}
+                onClick={() => setShowImposter(null)}
                 className="w-full py-3 px-6 text-lg font-bold text-white bg-gray-600 rounded-xl hover:bg-gray-700 transition-colors"
               >
                 Close
