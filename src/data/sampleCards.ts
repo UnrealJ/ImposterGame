@@ -147,9 +147,46 @@ const FOOD_CARDS: Card[] = [
   { name: 'Candy', hint: 'Sugary' }
 ];
 
+const SCHOOL_SUPPLIES: Card[] = [
+  { name: 'notebook', hint: 'cover' },
+  { name: 'pencil', hint: 'case' },
+  { name: 'eraser', hint: 'clean' },
+  { name: 'sharpener', hint: 'blade' },
+  { name: 'backpack', hint: 'strap' },
+  { name: 'lunchbox', hint: 'energy' },
+  { name: 'water bottle', hint: 'hydration' },
+  { name: 'snack', hint: 'crunch' },
+  { name: 'textbook', hint: 'study' },
+  { name: 'calculator', hint: 'numbers' },
+  { name: 'ruler', hint: 'lines' },
+  { name: 'glue stick', hint: 'adhesive' },
+  { name: 'scissors', hint: 'cut' },
+  { name: 'highlighter', hint: 'color' },
+  { name: 'marker', hint: 'draw' },
+  { name: 'stapler', hint: 'paper' },
+  { name: 'binder', hint: 'cover' },
+  { name: 'folder', hint: 'organize' },
+  { name: 'clipboard', hint: 'hold' },
+  { name: 'whiteboard', hint: 'write' },
+  { name: 'projector', hint: 'display' },
+  { name: 'desk', hint: 'work' },
+  { name: 'chair', hint: 'table' },
+  { name: 'computer', hint: 'display' },
+  { name: 'mouse', hint: 'click' },
+  { name: 'keyboard', hint: 'letters' },
+  { name: 'monitor', hint: 'display' },
+  { name: 'printer', hint: 'paper' },
+  { name: 'paper', hint: 'write' },
+  { name: 'pen', hint: 'write' },
+  { name: 'flashcards', hint: 'study' },
+  { name: 'calendar', hint: 'date' },
+  { name: 'alarm clock', hint: 'time' }
+];
+
 export const PRESETS = {
   'Clash Royale Cards': CLASH_ROYALE_CARDS,
   'Food': FOOD_CARDS,
+  'School Supplies': SCHOOL_SUPPLIES,
 };
 
 export const SAMPLE_CARDS = CLASH_ROYALE_CARDS;
