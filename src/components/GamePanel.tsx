@@ -57,7 +57,7 @@ export const GamePanel = ({
               <div className="text-3xl sm:text-4xl font-bold text-red-600 mb-4">
                 YOU ARE THE IMPOSTER!
               </div>
-              {!settings.noHintsForImposter && (
+              {settings.imposterHints && (
                 <div className="text-xl sm:text-2xl text-gray-700">
                   <div className="font-semibold mb-2">Hint:</div>
                   <div className="text-lg sm:text-xl text-gray-600">

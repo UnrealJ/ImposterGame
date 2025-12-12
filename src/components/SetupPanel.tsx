@@ -126,19 +126,19 @@ export const SetupPanel = ({
           <div className="flex items-center space-x-3">
             <input
               type="checkbox"
-              id="no-hints"
-              checked={settings.noHintsForImposter}
+              id="imposter-hints"
+              checked={settings.imposterHints}
               onChange={(e) =>
                 onSettingsChange({
                   ...settings,
-                  noHintsForImposter: e.target.checked,
+                  imposterHints: e.target.checked,
                 })
               }
               disabled={disabled}
               className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 disabled:cursor-not-allowed"
             />
-            <label htmlFor="no-hints" className="text-sm font-medium text-gray-700">
-              No hints for imposter
+            <label htmlFor="imposter-hints" className="text-sm font-medium text-gray-700">
+              Imposter hints
             </label>
           </div>
 
@@ -157,7 +157,7 @@ export const SetupPanel = ({
               className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 disabled:cursor-not-allowed"
             />
             <label htmlFor="wild-mode" className="text-sm font-medium text-gray-700">
-              Wild Mode (0-2 imposters)
+              Wild Mode
             </label>
           </div>
         </div>

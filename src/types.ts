@@ -8,7 +8,7 @@ export type GamePhase = 'idle' | 'ready' | 'revealing' | 'finished';
 export interface GameSettings {
   revealDuration: number;
   preventConsecutiveCard: boolean;
-  noHintsForImposter: boolean;
+  imposterHints: boolean;
   wildMode: boolean;
 }
 

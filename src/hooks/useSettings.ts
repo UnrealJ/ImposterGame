@@ -6,7 +6,7 @@ const SETTINGS_KEY = 'imposter-settings';
 const DEFAULT_SETTINGS: GameSettings = {
   revealDuration: 3,
   preventConsecutiveCard: true,
-  noHintsForImposter: false,
+  imposterHints: true,
   wildMode: false,
 };
 
@@ -20,7 +20,7 @@ export const useSettings = () => {
           revealDuration: parsed.revealDuration ?? DEFAULT_SETTINGS.revealDuration,
           preventConsecutiveCard:
             parsed.preventConsecutiveCard ?? DEFAULT_SETTINGS.preventConsecutiveCard,
-          noHintsForImposter: parsed.noHintsForImposter ?? DEFAULT_SETTINGS.noHintsForImposter,
+          imposterHints: parsed.imposterHints ?? DEFAULT_SETTINGS.imposterHints,
           wildMode: parsed.wildMode ?? DEFAULT_SETTINGS.wildMode,
         };
       }
