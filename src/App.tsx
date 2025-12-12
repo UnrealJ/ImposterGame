@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     if (gameState.phase === 'revealing') {
-      const isImposter = gameState.currentPlayerIndex === gameState.imposterIndex;
+      const isImposter = gameState.imposterIndices.includes(gameState.currentPlayerIndex);
       if (isImposter) {
         setAriaLiveMessage(
           `You are the imposter. Hint: ${gameState.currentCard?.hint || 'No hint yet'}`
@@ -41,7 +41,7 @@ function App() {
     } else if (gameState.phase === 'finished') {
       setAriaLiveMessage('All players have seen their roles. Time to discuss.');
     }
-  }, [gameState.phase, gameState.currentPlayerIndex, gameState.imposterIndex, gameState.currentCard]);
+  }, [gameState.phase, gameState.currentPlayerIndex, gameState.imposterIndices, gameState.currentCard]);
 
   useEffect(() => {
     if (liveCountdown) {
@@ -71,7 +71,10 @@ function App() {
 
   const handleRevealImposter = () => {
     setShowImposter('imposter');
-    setAriaLiveMessage(`The imposter is Player ${gameState.imposterIndex + 1}`);
+    const imposterText = gameState.imposterIndices
+      .map(idx => `Player ${idx + 1}`)
+      .join(gameState.imposterIndices.length === 2 ? ' and ' : ', ');
+    setAriaLiveMessage(`The imposters are ${imposterText}`);
   };
 
   const handleRevealCard = () => {
@@ -129,10 +132,18 @@ function App() {
               {showImposter === 'imposter' ? (
                 <>
                   <div className="text-5xl font-bold text-red-600">
-                    ඞ IMPOSTER!
+                    ඞ IMPOSTER{gameState.imposterIndices.length !== 1 ? 'S' : ''}!
                   </div>
-                  <div className="text-3xl font-bold text-gray-900">
-                    Player {gameState.imposterIndex + 1}
+                  <div className="space-y-2">
+                    {gameState.imposterIndices.length === 0 ? (
+                      <div className="text-3xl font-bold text-gray-900">No imposters!</div>
+                    ) : (
+                      gameState.imposterIndices.map(idx => (
+                        <div key={idx} className="text-3xl font-bold text-gray-900">
+                          Player {idx + 1}
+                        </div>
+                      ))
+                    )}
                   </div>
                 </>
               ) : (

@@ -141,6 +141,25 @@ export const SetupPanel = ({
               No hints for imposter
             </label>
           </div>
+
+          <div className="flex items-center space-x-3">
+            <input
+              type="checkbox"
+              id="wild-mode"
+              checked={settings.wildMode}
+              onChange={(e) =>
+                onSettingsChange({
+                  ...settings,
+                  wildMode: e.target.checked,
+                })
+              }
+              disabled={disabled}
+              className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 disabled:cursor-not-allowed"
+            />
+            <label htmlFor="wild-mode" className="text-sm font-medium text-gray-700">
+              Wild Mode (0-2 imposters)
+            </label>
+          </div>
         </div>
 
         <button

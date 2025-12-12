@@ -13,7 +13,7 @@ export const useImposterGame = ({ cards, settings }: UseImposterGameProps) => {
     phase: 'idle',
     playerCount: 4,
     currentPlayerIndex: 0,
-    imposterIndex: -1,
+    imposterIndices: [],
     currentCard: null,
     lastCardUsed: null,
     remainingMs: 0,
@@ -32,6 +32,27 @@ export const useImposterGame = ({ cards, settings }: UseImposterGameProps) => {
   useEffect(() => {
     return () => clearTimer();
   }, [clearTimer]);
+
+  const generateImposterIndices = useCallback((playerCount: number): number[] => {
+    if (settings.wildMode) {
+      const imposterCount = Math.floor(Math.random() * 3);
+      const indices: number[] = [];
+      const selected = new Set<number>();
+
+      for (let i = 0; i < imposterCount; i++) {
+        let index;
+        do {
+          index = Math.floor(Math.random() * playerCount);
+        } while (selected.has(index));
+        selected.add(index);
+        indices.push(index);
+      }
+
+      return indices.sort((a, b) => a - b);
+    } else {
+      return [Math.floor(Math.random() * playerCount)];
+    }
+  }, [settings.wildMode]);
 
   const selectRandomCard = useCallback((): Card | null => {
     if (cards.length === 0) return null;
@@ -54,19 +75,19 @@ export const useImposterGame = ({ cards, settings }: UseImposterGameProps) => {
   const startGame = useCallback((playerCount: number) => {
     if (playerCount < 3 || cards.length === 0) return;
 
-    const imposterIndex = Math.floor(Math.random() * playerCount);
+    const imposterIndices = generateImposterIndices(playerCount);
     const selectedCard = selectRandomCard();
 
     setGameState({
       phase: 'ready',
       playerCount,
       currentPlayerIndex: 0,
-      imposterIndex,
+      imposterIndices,
       currentCard: selectedCard,
       lastCardUsed: selectedCard,
       remainingMs: 0,
     });
-  }, [cards.length, selectRandomCard]);
+  }, [cards.length, selectRandomCard, generateImposterIndices]);
 
   const revealRole = useCallback(() => {
     if (gameState.phase !== 'ready') return;
@@ -107,19 +128,19 @@ export const useImposterGame = ({ cards, settings }: UseImposterGameProps) => {
   }, [gameState.phase, settings.revealDuration, clearTimer]);
 
   const newRound = useCallback(() => {
-    const imposterIndex = Math.floor(Math.random() * gameState.playerCount);
+    const imposterIndices = generateImposterIndices(gameState.playerCount);
     const selectedCard = selectRandomCard();
 
     setGameState(prev => ({
       ...prev,
       phase: 'ready',
       currentPlayerIndex: 0,
-      imposterIndex,
+      imposterIndices,
       currentCard: selectedCard,
       lastCardUsed: selectedCard,
       remainingMs: 0,
     }));
-  }, [gameState.playerCount, selectRandomCard]);
+  }, [gameState.playerCount, selectRandomCard, generateImposterIndices]);
 
   const newGame = useCallback(() => {
     clearTimer();
@@ -128,7 +149,7 @@ export const useImposterGame = ({ cards, settings }: UseImposterGameProps) => {
       phase: 'idle',
       playerCount: 4,
       currentPlayerIndex: 0,
-      imposterIndex: -1,
+      imposterIndices: [],
       currentCard: null,
       lastCardUsed: null,
       remainingMs: 0,

@@ -42,7 +42,7 @@ export const GamePanel = ({
 
   const currentPlayerNumber = gameState.currentPlayerIndex + 1;
   const nextPlayerNumber = gameState.currentPlayerIndex + 2;
-  const isImposter = gameState.currentPlayerIndex === gameState.imposterIndex;
+  const isImposter = gameState.imposterIndices.includes(gameState.currentPlayerIndex);
 
   const renderStatus = () => {
     if (gameState.phase === 'revealing') {

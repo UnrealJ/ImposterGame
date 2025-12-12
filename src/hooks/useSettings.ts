@@ -7,6 +7,7 @@ const DEFAULT_SETTINGS: GameSettings = {
   revealDuration: 3,
   preventConsecutiveCard: true,
   noHintsForImposter: false,
+  wildMode: false,
 };
 
 export const useSettings = () => {
@@ -20,6 +21,7 @@ export const useSettings = () => {
           preventConsecutiveCard:
             parsed.preventConsecutiveCard ?? DEFAULT_SETTINGS.preventConsecutiveCard,
           noHintsForImposter: parsed.noHintsForImposter ?? DEFAULT_SETTINGS.noHintsForImposter,
+          wildMode: parsed.wildMode ?? DEFAULT_SETTINGS.wildMode,
         };
       }
     } catch {

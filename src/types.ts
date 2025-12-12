@@ -9,13 +9,14 @@ export interface GameSettings {
   revealDuration: number;
   preventConsecutiveCard: boolean;
   noHintsForImposter: boolean;
+  wildMode: boolean;
 }
 
 export interface GameState {
   phase: GamePhase;
   playerCount: number;
   currentPlayerIndex: number;
-  imposterIndex: number;
+  imposterIndices: number[];
   currentCard: Card | null;
   lastCardUsed: Card | null;
   remainingMs: number;
