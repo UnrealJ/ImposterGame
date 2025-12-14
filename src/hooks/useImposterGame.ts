@@ -40,12 +40,12 @@ export const useImposterGame = ({ cards, settings }: UseImposterGameProps) => {
 
       if (roll < 0.1) {
         imposterCount = 0;
-      } else if (roll < 0.5) {
+      } else if (roll < 0.3) {
         imposterCount = 1;
-      } else if (roll < 0.9) {
+      } else if (roll < 0.65) {
         imposterCount = 2;
       } else {
-        imposterCount = playerCount;
+        imposterCount = 3;
       }
 
       const indices: number[] = [];
