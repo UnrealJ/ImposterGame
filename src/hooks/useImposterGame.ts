@@ -35,7 +35,19 @@ export const useImposterGame = ({ cards, settings }: UseImposterGameProps) => {
 
   const generateImposterIndices = useCallback((playerCount: number): number[] => {
     if (settings.wildMode) {
-      const imposterCount = Math.floor(Math.random() * 3);
+      const roll = Math.random();
+      let imposterCount: number;
+
+      if (roll < 0.1) {
+        imposterCount = 0;
+      } else if (roll < 0.5) {
+        imposterCount = 1;
+      } else if (roll < 0.9) {
+        imposterCount = 2;
+      } else {
+        imposterCount = playerCount;
+      }
+
       const indices: number[] = [];
       const selected = new Set<number>();
 
